@@ -52,11 +52,24 @@
     "CMPBrowser.plant": "Plant",
     "CMPBrowser.undead": "Undead",
     "CMPBrowser.abilities": "Abilities",
-    "CMPBrowser.dmgInteraction": "Damage Interaction",
     "CMPBrowser.dmgDealt": "Damage Dealt",
     "CMPBrowser.size": "Size",
     "CMPBrowser.spellBrowser":"Spell Browser",
     "CMPBrowser.npcBrowser":"NPC Browser",
-    "CMPBrowser.settings":"Settings"
+    "CMPBrowser.settings":"Settings",
+
+    "CMPBrowser.dmgInteraction": "Damage Interaction",
+    "CMPBrowser.PD": "Physical Defense",
+    "CMPBrowser.MD": "Mental Defense",
+    "CMPBrowser.AC": "Armor Class",
+	"CMPBrowser.sizeN": "normal",
+	"CMPBrowser.sizeL": "large",
+	"CMPBrowser.sizeH": "huge",
+	"CMPBrowser.size2x": "double strenght",
+	"CMPBrowser.size3x": "triple strenght",
+    "CMPBrowser.devil": "Devil",
+    "CMPBrowser.demon": "Demon"
+
+
     
 }

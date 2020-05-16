@@ -8,13 +8,13 @@
                 <dt>{{localize "CMPBrowser.sortBy"}}:</dt>
                 <dd><select name="sortorder">
                     <option value="name" selected>{{localize "Name"}}</option>
-                    <option value="cr">{{localize "CMPBrowser.cr"}}</option>
-                    <option value="size">{{localize "DND5E.Size"}}</option>
+                    <option value="lvl">{{localize "CMPBrowser.lvl"}}</option>
+                    <option value="size">{{localize "CMPBrowser.Size"}}</option>
                 </select></dd>
             </dl>
             <button id="reset-npc-filter">Reset NPC Filters</button>
         </div>                
-        {{> "modules/compendium-browser/template/filter-container.html" filters=npcFilters}}
+        {{> "modules/compendium-browser-13thage/template/filter-container.html" filters=npcFilters}}
     </div>
     <ul>
         {{#each npcs as |npc id|}}
@@ -27,12 +27,12 @@
                     <span class="item-edit"><a>{{npc.name}}</a></span>
                 </div>
                 <div class="npc-tags">
-                    <span class="cr-display" title="Challange Rating">CR {{npc.displayCR}}</span>
+                    <span class="lvl-display" title="Level">Level {{npc.displayLvl}}</span>
                     <span class="size-display">{{npc.displaySize}}</span>
-                    <span class="type">{{npc.data.details.type.value}}</span>
+                    <span class="type-display">{{npc.data.details.type.value}}</span>
                 </div>
                 <div class="filter-tags">
-                    <input type="hidden" name="order.cr" value="{{npc.data.details.cr}}">
+                    <input type="hidden" name="order.lvl" value="{{npc.data.details.lvl}}">
                     <input type="hidden" name="order.size" value="{{npc.filterSize}}">
                 </div>
             </div>

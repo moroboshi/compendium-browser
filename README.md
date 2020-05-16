@@ -1,8 +1,8 @@
-# Compendium Browser
+# Compendium Browser 13th Age
 
-> This version only works for Foundry v0.4.4 and up. To use the previous version please visit https://github.com/syl3r86/compendium-browser/tree/pre-0.4.4
+This is a modified version of [Compendium Browser](https://github.com/syl3r86/compendium-browser) by felix mueller
 
-A module to easily browse and filter spells as well as npcs loaded from compendie.
+A module to easily browse npc for and filter spells as well as npcs loaded from compendie.
 
 ## Installation
 1. Copy this link and use it in Foundrys Module Manager to install the Module

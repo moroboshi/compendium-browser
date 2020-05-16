@@ -1,10 +1,10 @@
 {
-    "name": "compendium-browser",
-    "title": "Compendium Browser",
+    "name": "compendium-browser-13thage",
+    "title": "Compendium Browser 13th Age",
     "description": "A module to easily browse and filter spells as well as npcs loaded from compendie.",
     "version": "0.2.0",
     "author": "Felix#6196",
-    "systems": ["dnd5e"],
+    "systems": ["archmage"],
     "scripts": ["./compendium-browser.js"],
     "styles": ["./compendium-browser.css"],
     "packs": [],
@@ -13,21 +13,11 @@
           "lang": "en",
           "name": "English",
           "path": "lang/en.json"
-        },
-        {
-          "lang": "ja",
-          "name": "Japanese",
-          "path": "lang/ja.json"
-        },
-        {
-          "lang": "fr",
-          "name": "French (FRANCE)",
-          "path": "lang/fr.json"
         }
     ],
-    "url": "https://github.com/syl3r86/compendium-browser",
-    "manifest": "https://raw.githubusercontent.com/syl3r86/compendium-browser/master/module.json",
-    "download": "https://github.com/syl3r86/compendium-browser/archive/master.zip",
+    "url": "---",
+    "manifest": "---",
+    "download": "---",
     "minimumCoreVersion": "0.5.5",
     "compatibleCoreVersion": "0.5.5"
 }
