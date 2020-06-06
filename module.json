@@ -1,23 +1,37 @@
 {
-    "name": "compendium-browser-13thage",
-    "title": "Compendium Browser 13th Age",
-    "description": "A module to easily browse and filter spells as well as npcs loaded from compendie.",
-    "version": "0.2.0",
-    "author": "Felix#6196",
-    "systems": ["archmage"],
-    "scripts": ["./compendium-browser.js"],
-    "styles": ["./compendium-browser.css"],
-    "packs": [],
-    "languages": [
-        {
-          "lang": "en",
-          "name": "English",
-          "path": "lang/en.json"
-        }
-    ],
-    "url": "---",
-    "manifest": "---",
-    "download": "---",
-    "minimumCoreVersion": "0.5.5",
-    "compatibleCoreVersion": "0.5.5"
+  "name": "compendium-browser-13thage",
+  "title": "Compendium Browser 13th Age",
+  "description": "A module to easily browse and filter power as well as npcs loaded from compendium.",
+  "version": "0.2.0",
+  "authors": [
+    {
+      "name": "Felix#6196 (original author for dnd 5e)"
+    },
+    {
+      "name": "moroboshi#4124 (hacked for 13th age)"
+    }
+  ],
+  "systems": [
+    "archmage"
+  ],
+  "scripts": [
+    "./compendium-browser.js"
+  ],
+  "styles": [
+    "./compendium-browser.css"
+  ],
+  "packs": [],
+  "languages": [
+    {
+      "lang": "en",
+      "name": "English",
+      "path": "lang/en.json"
+    }
+  ],
+  "license": "https://creativecommons.org/licenses/by/4.0/",
+  "url": "https://github.com/moroboshi/compendium-browser",
+  "manifest": "https://raw.githubusercontent.com/moroboshi/compendium-browser/master/module.json",
+  "download": "https://github.com/moroboshi/compendium-browser/archive/master.zip",
+  "minimumCoreVersion": "0.5.5",
+  "compatibleCoreVersion": "0.6.1"
 }
