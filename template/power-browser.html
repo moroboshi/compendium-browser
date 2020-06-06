@@ -1,0 +1,44 @@
+<div class="power-browser browser flexrow">
+    <div class="control-area">
+        <div class="filtercontainer" id="tagfilter">            
+            <div class="filter"  data-type="text" data-path="name">
+                <input class="" name="textFilter" type="text" value="" data-dtype="String" placeholder="{{localize "Name"}}"/>
+            </div>
+            <dl id="sorter">
+                <dt>{{localize "CMPBrowser.sortBy"}}:</dt>
+                <dd><select class="null" name="sortorder">
+                    <option value="true" selected>{{localize "Name"}}</option>
+                    <option value="false">{{localize "CMPBrowser.lvl"}}</option>
+                </select></dd>
+            </dl> 
+            <button id="reset-power-filter">Reset Power Filters</button>
+        </div>
+        {{> "modules/compendium-browser-13thage/template/filter-container.html" filters=powerFilters}}
+    </div>
+    <ul>
+        {{#each powers as |power id|}}
+        <li class="power flexrow draggable" data-entry-compendium="{{power.compendium}}" data-entry-id="{{power._id}}">
+            <div class="power-image">
+                <img class="" src="{{power.img}}" title="{{power.name}}" width="32" height="32"/>
+            </div>  
+            <div class="power-name">
+                <span class="item-edit" ><a>{{power.name}}</a></span>
+            </div>
+            <div class="power-tags">
+                <span title="Power level">{{#if power.data.level}}{{power.data.level}}{{else}}C{{/if}}</span>
+                <div class="spacer-large"></div>
+                <span {{#unless power.data.components.ritual}}style="color:#bbb;" title="{{localize "No"}} {{localize "CMPBrowser.ritual"}}"{{else}} title="{{localize "CMPBrowser.ritual"}}"{{/unless}}>R</span>
+                <span {{#unless power.data.components.concentration}}style="color:#bbb;" title="{{localize "No"}} {{localize "CMPBrowser.concentration"}}"{{else}} title="{{localize "CMPBrowser.concentration"}}"{{/unless}}>C</span>
+                <div class="spacer"></div>
+                <span {{#unless power.data.components.vocal}}style="color:#bbb;" title="{{localize "No"}} {{localize "CMPBrowser.verbal"}}"{{else}} title="{{localize "CMPBrowser.verbal"}}"{{/unless}}>V</span>
+                <span {{#unless power.data.components.somatic}}style="color:#bbb;" title="{{localize "No"}} {{localize "CMPBrowser.somatic"}}"{{else}} title="{{localize "CMPBrowser.somatic"}}"{{/unless}}>S</span>
+                <span {{#unless power.data.components.material}}style="color:#bbb;" title="no{{localize "No"}} {{localize "CMPBrowser.material"}}"{{else}} title="{{localize "CMPBrowser.material"}}"{{/unless}}>M</span>
+            </div>
+            <div class="filter-tags">                
+                <input type="hidden" name="level" value="{{power.data.level}}">
+            </div>
+        </li>
+        {{/each}}
+    </ul>
+
+</div>

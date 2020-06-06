@@ -1,10 +1,10 @@
 <div class="settings">
     <div class="settings-group">
         <h3>{{localize "CMPBrowser.generalSettings"}}</h3>
-<!--        <label>
-            <input data-setting="allow-spell-browser" type="checkbox" {{#if settings.allowSpellBrowser}}checked{{/if}}>
-            <h4>{{localize "CMPBrowser.allowSpellAcc"}}</h4>
-        </label> -->
+        <label>
+            <input data-setting="allow-power-browser" type="checkbox" {{#if settings.allowPowerBrowser}}checked{{/if}}>
+            <h4>{{localize "CMPBrowser.allowPowerAcc"}}</h4>
+        </label>
         <label>
             <input data-setting="allow-npc-browser" type="checkbox" {{#if settings.allowNpcBrowser}}checked{{/if}}>
             <h4>{{localize "CMPBrowser.allowNpcAcc"}}</h4> 
@@ -12,14 +12,14 @@
     </div>
     
     <div class="settings-group">
-<!--        <h3>{{localize "CMPBrowser.compSettingsSpell"}}</h3>
-        {{#each settings.loadedSpellCompendium as |spellComp key|}}
+        <h3>{{localize "CMPBrowser.compSettingsPower"}}</h3>
+        {{#each settings.loadedPowerCompendium as |powerComp key|}}
             <label>
-                <input data-setting="spell-compendium-setting" data-key="{{key}}" data-type="spell" type="checkbox"{{#if spellComp.load}}checked{{/if}}>
-                <h4>{{localize "CMPBrowser.load"}} {{spellComp.name}}</h4>
+                <input data-setting="power-compendium-setting" data-key="{{key}}" data-type="power" type="checkbox"{{#if powerComp.load}}checked{{/if}}>
+                <h4>{{localize "CMPBrowser.load"}} {{powerComp.name}}</h4>
             </label>
         {{/each}}
-    </div>-->
+    </div>
     <div class="settings-group">
         <h3>{{localize "CMPBrowser.compSettingsNpc"}}</h3>
         {{#each settings.loadedNpcCompendium as |npcComp key|}}

@@ -13,21 +13,21 @@ ACTORSIZES = {
 };
 
 
-class SpellBrowser extends Application {
+class PowerBrowser extends Application {
     
     async initializeContent() {
         // load settings
         if (this.settings === undefined) {
             this.initSettings();
         }
-//        this.loadSpells().then(obj => {
-//            this.spells = obj;
-//        });
+        this.loadPowers().then(obj => {
+            this.powers = obj;
+        });
         this.loadNpcs().then(obj => {
         	this.npcs = obj;
         });
         await loadTemplates([
-            "modules/compendium-browser-13thage/template/spell-browser.html",
+            "modules/compendium-browser-13thage/template/power-browser.html",
             "modules/compendium-browser-13thage/template/npc-browser.html",
             "modules/compendium-browser-13thage/template/filter-container.html",
             "modules/compendium-browser-13thage/template/settings.html"
@@ -35,10 +35,10 @@ class SpellBrowser extends Application {
 
         this.hookCompendiumList();
 
-//        this.spellFilters = {
-//            registeredFilterCategorys: {},
-//            activeFilters: {}
-//        };
+        this.powerFilters = {
+            registeredFilterCategorys: {},
+            activeFilters: {}
+        };
         this.npcFilters = {
             registeredFilterCategorys: {},
             activeFilters: {}
@@ -48,7 +48,7 @@ class SpellBrowser extends Application {
     static get defaultOptions() {
         const options = super.defaultOptions;
         mergeObject(options, {
-            tabs: [{ navSelector: ".tabs", contentSelector: ".content", initial: "spell" }],
+            tabs: [{ navSelector: ".tabs", contentSelector: ".content", initial: "power" }],
             classes: options.classes.concat('compendium-browser'),
             template: "modules/compendium-browser-13thage/template/template.html",
             width: 800,
@@ -65,7 +65,7 @@ class SpellBrowser extends Application {
             if (this.settings === undefined) {
                 this.initSettings();
             }
-            if (game.user.isGM || this.settings.allowSpellBrowser || this.settings.allowNpcBrowser) {
+            if (game.user.isGM || this.settings.allowPowerBrowser || this.settings.allowNpcBrowser) {
                 const importButton = $(`<button class="compendium-browser-btn"><i class="fas fa-fire"></i> ${game.i18n.localize("CMPBrowser.compendiumBrowser")}</button>`);
                 html.find('.compendium-browser-btn').remove();
 
@@ -82,16 +82,16 @@ class SpellBrowser extends Application {
     }
 
     async getData() {
-//        if (!this.spellsLoaded) {
-//            // spells will be stored locally to not require full loading each time the browser is opened
-//            this.spells = await this.loadSpells();
-//            this.spellsLoaded = true;
-//        }
+        if (!this.powerLoaded) {
+            // spells will be stored locally to not require full loading each time the browser is opened
+            this.powers = await this.loadPowers();
+            this.powersLoaded = true;
+        }
 
         let data = {};
-//        data.spells = this.spells;
-//        data.spellFilters = this.spellFilters;
-//        data.showSpellBrowser = (game.user.isGM || this.settings.allowSpellBrowser);
+        data.powerss = this.powers;
+        data.powerFilters = this.powerFilters;
+        data.showPowerBrowser = (game.user.isGM || this.settings.allowPowerBrowser);
         data.npcs = this.npcs;
         data.npcFilters = this.npcFilters;
         data.showNpcBrowser = (game.user.isGM || this.settings.allowNpcBrowser);
@@ -99,43 +99,43 @@ class SpellBrowser extends Application {
         data.isGM = game.user.isGM;
         return data;
     }
-//
-//    async loadSpells() {
-//        console.log('Spell Browser | Started loading spells');
-//
-//        if (this.classList === undefined) {
-//            this.classList = await fetch('modules/compendium-browser/spell-classes.json').then(result => {
-//                return result.json();
-//            }).then(obj => {
-//                return this.classList = obj;
-//            });
-//        }
-//
-//        this.spellsLoaded = false;
-//        this.spellsLoading = true;
-//        
-//        let unfoundSpells = '';
-//
-//        let spells = {};
-//
-//        for (let pack of game.packs) {
-//            if (pack['metadata']['entity'] == "Item" && this.settings.loadedSpellCompendium[pack.collection].load) {
-//                await pack.getContent().then(content => {
-//                    for (let spell of content) {
-//                        spell = spell.data;
-//                        if (spell.type == 'spell') {
-//
-//                            spell.compendium = pack.collection;
-//
-//                            // determining classes that can use the spell
-//                            let cleanSpellName = spell.name.toLowerCase().replace(/[^一-龠ぁ-ゔァ-ヴーa-zA-Z0-9ａ-ｚＡ-Ｚ０-９々〆〤]/g, '').replace("'", '').replace(/ /g, '');
-//                            //let cleanSpellName = spell.name.toLowerCase().replace(/[^a-zA-Z0-9\s:]/g, '').replace("'", '').replace(/ /g, '');
-//                            if (this.classList[cleanSpellName] !== undefined) {
-//                                let classes = this.classList[cleanSpellName];
-//                                spell.data.classes = classes.split(',');
-//                            } else {
-//                                unfoundSpells += cleanSpellName + ',';
-//                            }
+
+    async loadPowers() {
+        console.log('Power Browser | Started loading powers');
+
+        if (this.classList === undefined) {
+            this.classList = await fetch('modules/compendium-browser-13thage/power-classes.json').then(result => {
+                return result.json();
+            }).then(obj => {
+                return this.classList = obj;
+            });
+        }
+
+        this.powersLoaded = false;
+        this.powersLoading = true;
+        
+        let unfoundPowers = '';
+
+        let powers = {};
+
+        for (let pack of game.packs) {
+            if (pack['metadata']['entity'] == "Item" && this.settings.loadedPowerCompendium[pack.collection].load) {
+                await pack.getContent().then(content => {
+                    for (let power of content) {
+                        power = power.data;
+                        if (power.type == 'power') {
+
+                            power.compendium = pack.collection;
+
+                            // determining classes that can use the spell
+                            let cleanPowerName = power.name.toLowerCase().replace(/[^一-龠ぁ-ゔァ-ヴーa-zA-Z0-9ａ-ｚＡ-Ｚ０-９々〆〤]/g, '').replace("'", '').replace(/ /g, '');
+                            //let cleanSpellName = spell.name.toLowerCase().replace(/[^a-zA-Z0-9\s:]/g, '').replace("'", '').replace(/ /g, '');
+                            if (this.classList[cleanPowerName] !== undefined) {
+                                let classes = this.classList[cleanPowerName];
+                                power.data.classes = classes.split(',');
+                            } else {
+                                unfoundPowers += cleanPowerName + ',';
+                            }
 //
 //                            // getting damage types
 //                            spell.damageTypes = [];
@@ -148,22 +148,22 @@ class SpellBrowser extends Application {
 //                                }
 //                            }
 //
-//                            spells[(spell._id)] = spell;
-//                        }
-//                    }
-//                });
-//            }
-//        }
-//        if (unfoundSpells !== '') {
-//            console.log(`Spell Browser | List of Spells that don't have a class assosiated to them:`);
-//            console.log(unfoundSpells);
-//        }        
-//        console.log('Spell Browser | Finished loading spells');
-//        return spells;
-//    }
+                            powers[(power._id)] = power;
+                        }
+                    }
+                });
+            }
+        }
+        if (unfoundPowers !== '') {
+            console.log(`Power Browser | List of Powers that don't have a class assosiated to them:`);
+            console.log(unfoundPowers);
+        }        
+        console.log('Power Browser | Finished loading powers');
+        return powers;
+    }
     
     async loadNpcs() {
-        console.log('NPC Browser | Started loading spells');
+        console.log('NPC Browser | Started loading NPCs');
 
         let npcs = {};
 
@@ -270,7 +270,7 @@ class SpellBrowser extends Application {
 //                ol[0].append(element);
 //            }
 //        });
-        html.find('.spell-browser select[name=sortorder]').trigger('change');
+        html.find('.power-browser select[name=sortorder]').trigger('change');
 
         // sort npc list
         html.find('.npc-browser select[name=sortorder]').on('change', ev => {
@@ -286,10 +286,10 @@ class SpellBrowser extends Application {
         html.find('.npc-browser select[name=sortorder]').trigger('change')
 
         // reset filters
-//        html.find('#reset-spell-filter').click(ev => {
-//            this.spellFilters.activeFilters = {};
-//            this.render();
-//        });
+        html.find('#reset-power-filter').click(ev => {
+            this.powerFilters.activeFilters = {};
+            this.render();
+        });
 
         html.find('#reset-npc-filter').click(ev => {
             this.npcFilters.activeFilters = {};
@@ -300,14 +300,14 @@ class SpellBrowser extends Application {
         html.find('.settings input').on('change', ev => {
             let setting = ev.target.dataset.setting;
             let value = ev.target.checked;
-            if (setting === 'spell-compendium-setting') {
-//                let key = ev.target.dataset.key;
-//                this.settings.loadedSpellCompendium[key].load = value;
-//                this.loadSpells().then((spells) => {
-//                    this.spells = spells;
-//                    this.render();
-//                });
-//                ui.notifications.info("Settings Saved. Spell Compendiums are being reloaded.");
+            if (setting === 'power-compendium-setting') {
+                let key = ev.target.dataset.key;
+                this.settings.loadedPowerCompendium[key].load = value;
+                this.loadPowers().then((powers) => {
+                    this.powers = powers;
+                    this.render();
+                });
+                ui.notifications.info("Settings Saved. Power Compendiums are being reloaded.");
             } else if (setting === 'npc-compendium-setting') {
                 let key = ev.target.dataset.key;
                 this.settings.loadedNpcCompendium[key].load = value;
@@ -317,9 +317,9 @@ class SpellBrowser extends Application {
                 });
                 ui.notifications.info("Settings Saved. NPC Compendiums are being reloaded.");
             }
-//            if (setting === 'allow-spell-browser') {
-//                this.settings.allowSpellBrowser = value;
-//            }
+            if (setting === 'allow-power-browser') {
+                this.settings.allowPowrBrowser = value;
+            }
             if (setting === 'allow-npc-browser') {
                 this.settings.allowNpcBrowser = value;
             }
@@ -352,9 +352,9 @@ class SpellBrowser extends Application {
 
             let list = null;
             let subjects = null;
-            if (itemType === 'spell') {
-//                list = html.find('.spell-browser li');
-//                subjects = this.spells;
+            if (itemType === 'power') {
+                list = html.find('.power-browser li');
+                subjects = this.powers;
             } else if (itemType === 'npc') {
                 list = html.find('.npc-browser li');
                 subjects = this.npcs;
@@ -389,9 +389,9 @@ class SpellBrowser extends Application {
 
             let list = null;
             let subjects = null;
-            if (itemType === 'spell') {
-//                list = html.find('.spell-browser li');
-//                subjects = this.spells;
+            if (itemType === 'power') {
+                list = html.find('.power-browser li');
+                subjects = this.powers;
             } else if (itemType === 'npc') {
                 list = html.find('.npc-browser li');
                 subjects = this.npcs;
@@ -432,9 +432,9 @@ class SpellBrowser extends Application {
 
             let list = null;
             let subjects = null;
-            if (itemType === 'spell') {
-//                list = html.find('.spell-browser li');
-//                subjects = this.spells;
+            if (itemType === 'power') {
+                list = html.find('.power-browser li');
+                subjects = this.powers;
             } else if (itemType === 'npc') {
                 list = html.find('.npc-browser li');
                 subjects = this.npcs;
@@ -469,9 +469,9 @@ class SpellBrowser extends Application {
 
             let list = null;
             let subjects = null;
-            if (itemType === 'spell') {
-//                list = html.find('.spell-browser li');
-//                subjects = this.spells;
+            if (itemType === 'power') {
+                list = html.find('.power-browser li');
+                subjects = this.powers;
             } else if (itemType === 'npc') {
                 list = html.find('.npc-browser li');
                 subjects = this.npcs;
@@ -481,32 +481,32 @@ class SpellBrowser extends Application {
 
     }
 
-//    sortSpells(list, byName) {
-//        if(byName) {
-//            list.sort((a, b) => {
-//                let aName = $(a).find('.spell-name a')[0].innerHTML;
-//                let bName = $(b).find('.spell-name a')[0].innerHTML;
-//                if (aName < bName) return -1;
-//                if (aName > bName) return 1;
-//                return 0;
-//            });
-//        } else {
-//            list.sort((a, b) => {
-//                let aVal = $(a).find('input[name=level]').val();
-//                let bVal = $(b).find('input[name=level]').val();
-//                if (aVal < bVal) return -1;
-//                if (aVal > bVal) return 1;
-//                if (aVal == bVal) {
-//                    let aName = $(a).find('.spell-name a')[0].innerHTML;
-//                    let bName = $(b).find('.spell-name a')[0].innerHTML;
-//                    if (aName < bName) return -1;
-//                    if (aName > bName) return 1;
-//                    return 0;
-//                }
-//            });
-//        }
-//        return list;
-//    }
+    sortPowers(list, byName) {
+        if(byName) {
+            list.sort((a, b) => {
+                let aName = $(a).find('.power-name a')[0].innerHTML;
+                let bName = $(b).find('.power-name a')[0].innerHTML;
+                if (aName < bName) return -1;
+                if (aName > bName) return 1;
+                return 0;
+            });
+        } else {
+            list.sort((a, b) => {
+                let aVal = $(a).find('input[name=level]').val();
+                let bVal = $(b).find('input[name=level]').val();
+                if (aVal < bVal) return -1;
+                if (aVal > bVal) return 1;
+                if (aVal == bVal) {
+                    let aName = $(a).find('.power-name a')[0].innerHTML;
+                    let bName = $(b).find('.power-name a')[0].innerHTML;
+                    if (aName < bName) return -1;
+                    if (aName > bName) return 1;
+                    return 0;
+                }
+            });
+        }
+        return list;
+    }
 
     sortNpcs(list, orderBy) {
         switch (orderBy) {
@@ -630,16 +630,16 @@ class SpellBrowser extends Application {
 
     initSettings() {
         let defaultSettings = {
-//            loadedSpellCompendium: {},
+            loadedPowerCompendium: {},
             loadedNpcCompendium: {},
         };
         for (let compendium of game.packs) {
-//            if (compendium['metadata']['entity'] == "Item") {
-//                defaultSettings.loadedSpellCompendium[compendium.collection] = {
-//                    load: true,
-//                    name: `${compendium['metadata']['label']} (${compendium.collection})`
-//                };
-//            }
+            if (compendium['metadata']['entity'] == "Item") {
+                defaultSettings.loadedPowerCompendium[compendium.collection] = {
+                    load: true,
+                    name: `${compendium['metadata']['label']} (${compendium.collection})`
+                };
+            }
             if (compendium['metadata']['entity'] == "Actor") {
                 defaultSettings.loadedNpcCompendium[compendium.collection] = {
                     load: true,
@@ -661,11 +661,11 @@ class SpellBrowser extends Application {
         
         // load settings from container and apply to default settings (available compendie might have changed)
         let settings = game.settings.get('compendiumBrowser', 'settings');
-//        for (let compKey in defaultSettings.loadedSpellCompendium) {
-//            if (settings.loadedSpellCompendium[compKey] !== undefined) {
-//                defaultSettings.loadedSpellCompendium[compKey].load = settings.loadedSpellCompendium[compKey].load;
-//            }
-//        }
+        for (let compKey in defaultSettings.loadedPowerCompendium) {
+            if (settings.loadedPowerCompendium[compKey] !== undefined) {
+                defaultSettings.loadedPowerCompendium[compKey].load = settings.loadedPowerCompendium[compKey].load;
+            }
+        }
         for (let compKey in defaultSettings.loadedNpcCompendium) {
             if (settings.loadedNpcCompendium[compKey] !== undefined) {
                 defaultSettings.loadedNpcCompendium[compKey].load = settings.loadedNpcCompendium[compKey].load;
@@ -748,7 +748,7 @@ class SpellBrowser extends Application {
 Hooks.on('ready', async function() {
 
     if (game.compendiumBrowser === undefined) {
-        game.compendiumBrowser = new SpellBrowser();
+        game.compendiumBrowser = new PowerBrowser();
         await game.compendiumBrowser.initializeContent();
     }
 //
@@ -796,8 +796,8 @@ Hooks.on('ready', async function() {
         beast: game.i18n.localize("CMPBrowser.beast"),
         celestial: game.i18n.localize("CMPBrowser.celestial"),
         construct: game.i18n.localize("CMPBrowser.construct"),
-        demon: game.i18n.localize("CMPBBrowser.demon"),
-        devil: game.i18n.localize("CMPBBrowser.devil"),
+        demon: game.i18n.localize("CMPBrowser.demon"),
+        devil: game.i18n.localize("CMPBrowser.devil"),
         dragon: game.i18n.localize("CMPBrowser.dragon"),
         elemental: game.i18n.localize("CMPBrowser.elemental"),
         fey: game.i18n.localize("CMPBrowser.fey"),

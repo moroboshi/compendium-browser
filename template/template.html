@@ -1,12 +1,12 @@
 <div>
     <div class="tabs">
-        {{#if showSpellBrowser}}<a class="item" data-tab="spell">{{localize "CMPBrowser.spellBrowser"}}</a>{{/if}}
+        {{#if showPowerBrowser}}<a class="item" data-tab="spell">{{localize "CMPBrowser.powerBrowser"}}</a>{{/if}}
         {{#if showNpcBrowser}}<a class="item" data-tab="npc">{{localize "CMPBrowser.npcBrowser"}}</a>{{/if}}
         {{#if isGM}}<a class="item" data-tab="setting">{{localize "CMPBrowser.settings"}}</a>{{/if}}
     </div>
 
     <div class="content">
-            <div class="tab" data-tab="spell">{{#if showSpellBrowser}}{{> "modules/compendium-browser-13thage/template/spell-browser.html"}}{{/if}}</div>
+            <div class="tab" data-tab="power">{{#if showPowerBrowser}}{{> "modules/compendium-browser-13thage/template/power-browser.html"}}{{/if}}</div>
             <div class="tab" data-tab="npc">{{#if showNpcBrowser}}  {{> "modules/compendium-browser-13thage/template/npc-browser.html"}}{{/if}}</div>
             <div class="tab" data-tab="setting">{{#if isGM}}            {{> "modules/compendium-browser-13thage/template/settings.html"}}{{/if}}</div>
     </div>
