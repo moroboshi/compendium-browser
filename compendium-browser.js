@@ -1,4 +1,4 @@
-﻿/**
+/**
  * @author Felix Müller aka syl3r86
  * @version 0.2.0
  */
@@ -187,10 +187,10 @@ class PowerBrowser extends Application {
                         switch (size) {
                             case 'Normal': npc.filterSize = 5; break;
                             case 'Large': npc.filterSize = 4; break;
-                            case 'Huge': npc.filterSize = 2; break;
-                            case '2x': npc.filterSize = 3; break;
+                            case 'Huge': npc.filterSize = 3; break;
+                            case '2x': npc.filterSize = 2; break;
                             case '3x': npc.filterSize = 1; break;
-                            default: npc.filterSize = 6; break;
+                            default: npc.filterSize = 5; break;
                         }
                         let type = npc.data.details.size.value
                         // getting value for HasSpells and damage types
@@ -509,6 +509,7 @@ class PowerBrowser extends Application {
     }
 
     sortNpcs(list, orderBy) {
+
         switch (orderBy) {
             case 'name':
                 list.sort((a, b) => {
@@ -522,6 +523,8 @@ class PowerBrowser extends Application {
                 list.sort((a, b) => {
                     let aVal = Number($(a).find('input[name="order.lvl"]').val());
                     let bVal = Number($(b).find('input[name="order.lvl"]').val());
+                    console.log(aVal);
+                    console.log(bVal);
                     if (aVal < bVal) return -1;
                     if (aVal > bVal) return 1;
                     if (aVal == bVal) {
@@ -661,17 +664,17 @@ class PowerBrowser extends Application {
         
         // load settings from container and apply to default settings (available compendie might have changed)
         let settings = game.settings.get('compendiumBrowser', 'settings');
-        for (let compKey in defaultSettings.loadedPowerCompendium) {
-            if (settings.loadedPowerCompendium[compKey] !== undefined) {
-                defaultSettings.loadedPowerCompendium[compKey].load = settings.loadedPowerCompendium[compKey].load;
-            }
-        }
+//        for (let compKey in defaultSettings.loadedPowerCompendium) {
+//            if (settings.loadedPowerCompendium[compKey] !== undefined) {
+//                defaultSettings.loadedPowerCompendium[compKey].load = settings.loadedPowerCompendium[compKey].load;
+//            }
+//        }
         for (let compKey in defaultSettings.loadedNpcCompendium) {
             if (settings.loadedNpcCompendium[compKey] !== undefined) {
                 defaultSettings.loadedNpcCompendium[compKey].load = settings.loadedNpcCompendium[compKey].load;
             }
         }
-//        defaultSettings.allowSpellBrowser = settings.allowSpellBrowser;
+        defaultSettings.allowPowerBrowser = settings.allowPowerBrowser;
         defaultSettings.allowNpcBrowser = settings.allowNpcBrowser;
         if (game.user.isGM) {
             game.settings.set('compendiumBrowser', 'settings', defaultSettings);

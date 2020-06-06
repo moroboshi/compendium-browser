@@ -68,6 +68,10 @@
 	"CMPBrowser.size2x": "double strenght",
 	"CMPBrowser.size3x": "triple strenght",
     "CMPBrowser.devil": "Devil",
-    "CMPBrowser.demon": "Demon"
+    "CMPBrowser.demon": "Demon",
+    "CMPBrowser.powerBrowser": "Power Browser",
+    "CMPBrowser.Size": "Size",
+    "CMPBrowser.compSettingsPower": "Power Compendium Settings",
+    "CMPBrowser.allowPowerAcc": "Allow Players Access to the power browser"
     
 }
