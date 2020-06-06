@@ -1,13 +1,13 @@
 # Compendium Browser 13th Age
 
-This is a modified version of the original [Compendium Browser](https://github.com/syl3r86/compendium-browser) for *DnD* 5e by felix mueller
+This is a modified version of the original [Compendium Browser](https://github.com/moroboshi/compendium-browser) for *DnD* 5e by felix mueller
 
 A module to easily browse npc for and filter powers as well as npcs loaded from compendie.
 
 ## Installation
 1. Copy this link and use it in Foundrys Module Manager to install the Module
 
-    > https://raw.githubusercontent.com/syl3r86/compendium-browser/master/module.json
+    > https://raw.githubusercontent.com/moroboshi/compendium-browser/master/module.json
     
 2. Enable the Module in your Worlds Module Settings
 
